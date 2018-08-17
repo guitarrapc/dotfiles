@@ -1,0 +1,17 @@
+[user]
+	email = guitarrapc@users.noreply.github.com
+	name = Ikiru Yoshizaki
+[core]
+	excludesfile = /Users/guitarrapc/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/guitarrapc/.stCommitMsg
+[push]
+	default = current
+[color]
+	ui = auto
