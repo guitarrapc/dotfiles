@@ -2,16 +2,36 @@
 	email = guitarrapc@users.noreply.github.com
 	name = Ikiru Yoshizaki
 [core]
-	excludesfile = /Users/guitarrapc/.gitignore_global
+	excludesfile = ~/.gitignore_global
+[gui]
+	encoding = utf-8
+[web]
+	browser = google-chrome
+[commit]
+	template = /Users/guitarrapc/.stCommitMsg
+[push]
+	default = current
+[fetch]
+	# Auto-kill defunct remote branches
+	prune = true
+[include]
+	path = .gitconfig.local
+[color]
+	ui = auto
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[column]
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+	required = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-	template = /Users/guitarrapc/.stCommitMsg
-[push]
-	default = current
-[color]
-	ui = auto
