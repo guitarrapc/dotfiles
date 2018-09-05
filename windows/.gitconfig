@@ -5,6 +5,7 @@
 	autocrlf = true
 	quotepath = False
 	excludesfile = .gitignore_global
+	symlinks = true
 [gui]
     encoding = utf-8
 [web]
