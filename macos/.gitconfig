@@ -1,6 +1,6 @@
 [user]
-	email = guitarrapc@users.noreply.github.com
 	name = Ikiru Yoshizaki
+	email = guitarrapc@users.noreply.github.com
 [core]
 	excludesfile = ~/.gitignore_global
 [gui]

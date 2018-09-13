@@ -1,13 +1,13 @@
 [user]
 	name = Ikiru Yoshizaki
-	email = cherishacquire@outlook.com
+	email = guitarrapc@users.noreply.github.com
 [core]
 	autocrlf = true
 	quotepath = False
 	excludesfile = .gitignore_global
 	symlinks = true
 [gui]
-    encoding = utf-8
+	encoding = utf-8
 [web]
 	browser = google-chrome
 [push]
