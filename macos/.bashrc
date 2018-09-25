@@ -27,3 +27,7 @@ alias packer='docker run --rm -it -e ARM_CLIENT_ID=$ARM_CLIENT_ID -e ARM_CLIENT_
 # nodebrew
 export PATH=/usr/local/var/nodebrew/current/bin:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# alias
+alias ll="ls -lG"
+alias where="command -v"
