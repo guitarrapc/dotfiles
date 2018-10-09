@@ -6,6 +6,7 @@
 	quotepath = False
 	excludesfile = .gitignore_global
 	symlinks = true
+	filemode = false
 [gui]
 	encoding = utf-8
 [web]
