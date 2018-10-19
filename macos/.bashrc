@@ -31,3 +31,9 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # alias
 alias ll="ls -lG"
 alias where="command -v"
+
+# golang
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
