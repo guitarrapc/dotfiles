@@ -40,3 +40,7 @@ export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+
+# git prompt
+source ~/.git-prompt.sh
+export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
