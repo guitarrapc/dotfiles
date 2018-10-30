@@ -2,6 +2,11 @@
 
 # bash-completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# git-prompt
+[ -f ~/.gitprompt.sh ] && source ~/.gitprompt.sh
+export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+# git-completion
+[ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 
 # terraforming
 alias terraforming='docker run --rm --name terraforming -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=$AWS_DEFAULT_REGION quay.io/dtan4/terraforming:latest terraforming'
@@ -31,8 +36,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # alias
 alias ll="ls -lG"
 alias where="command -v"
-
-# alis for brew hub : https://hub.github.com/
 alias git=hub
 
 # golang
@@ -40,7 +43,3 @@ export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-
-# git prompt
-source ~/.gitprompt.sh
-export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
