@@ -32,6 +32,9 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 alias ll="ls -lG"
 alias where="command -v"
 
+# alis for brew hub : https://hub.github.com/
+alias git=hub
+
 # golang
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
