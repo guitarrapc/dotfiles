@@ -1,4 +1,4 @@
 #!/bin/bash
 # BEGIN ANSIBLE MANAGED BLOCK
-source "/home/guitarrapc/bashrc"
+source "~/bashrc"
 # END ANSIBLE MANAGED BLOCK

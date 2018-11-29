@@ -6,8 +6,8 @@ eval $(direnv hook bash)
 # END ANSIBLE MANAGED BLOCK : direnv
 
 # BEGIN ANSIBLE MANAGED BLOCK : pyenv
-export PYENV_ROOT="/home/guitarrapc/pyenv"
-export PATH="/home/guitarrapc/pyenv/shims:/home/guitarrapc/pyenv/bin:$PATH"
+export PYENV_ROOT="~/pyenv"
+export PATH="~/pyenv/shims:/home/guitarrapc/pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # END ANSIBLE MANAGED BLOCK : pyenv
