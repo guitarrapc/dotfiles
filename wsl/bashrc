@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# direnv
+export EDITOR=vim
+eval "$(direnv hook bash)"
+
+# auto start docker on wsl
+sudo cgroupfs-mount
+sudo usermod -aG docker $USER
+sudo service docker start
