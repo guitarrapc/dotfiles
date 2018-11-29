@@ -1,12 +1,6 @@
 #!/bin/bash
 
 # BEGIN ANSIBLE MANAGED BLOCK : direnv
-sudo cgroupfs-mount
-sudo usermod -aG docker $USER
-sudo service docker start
-# END ANSIBLE MANAGED BLOCK : docker
-
-# BEGIN ANSIBLE MANAGED BLOCK : direnv
 export EDITOR=vim
 eval $(direnv hook bash)
 # END ANSIBLE MANAGED BLOCK : direnv
@@ -17,3 +11,9 @@ export PATH="/home/guitarrapc/pyenv/shims:/home/guitarrapc/pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # END ANSIBLE MANAGED BLOCK : pyenv
+
+# BEGIN ANSIBLE MANAGED BLOCK : docker
+sudo cgroupfs-mount
+sudo usermod -aG docker $USER
+sudo service docker start
+# END ANSIBLE MANAGED BLOCK : docker
