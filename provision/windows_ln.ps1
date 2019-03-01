@@ -1,0 +1,1 @@
+Get-ChildItem -LiteralPath ../windows | %{cmd.exe /c mklink "$env:UserProfile\$($_.name)" $_.FullName}
