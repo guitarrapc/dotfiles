@@ -1,4 +1,0 @@
-#!/bin/bash
-# BEGIN ANSIBLE MANAGED BLOCK
-source "~/bashrc"
-# END ANSIBLE MANAGED BLOCK
