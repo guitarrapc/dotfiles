@@ -1,1 +1,24 @@
-dotfiles
+## dotfiles
+
+this repo is dotfiles for macos.
+
+## Run
+
+```shell
+$ git clone git@github.com:guitarrapc/dotfiles.git
+$ cd dotfiles
+$ ./setup.sh
+  [✔] /Users/guitarrapc/.bashrc → /Users/guitarrapc/github/guitarrapc/dotfiles/.bashrc
+  [✔] /Users/guitarrapc/.gitignore_global → /Users/guitarrapc/github/guitarrapc/dotfiles/.gitignore_global
+  [✔] /Users/guitarrapc/.ansible.cfg → /Users/guitarrapc/github/guitarrapc/dotfiles/.ansible.cfg
+  [✔] /Users/guitarrapc/.gitprompt.sh → /Users/guitarrapc/github/guitarrapc/dotfiles/.gitprompt.sh
+  [✔] /Users/guitarrapc/.bash_profile → /Users/guitarrapc/github/guitarrapc/dotfiles/.bash_profile
+  [✔] /Users/guitarrapc/.gitconfig → /Users/guitarrapc/github/guitarrapc/dotfiles/.gitconfig
+  [✔] /Users/guitarrapc/Library/Application Support/Code/User/settings.json → /Users/guitarrapc/github/guitarrapc/dotfiles/Library/Application Support/Code/User/settings.json
+  [✔] /Users/guitarrapc/.ssh/config → /Users/guitarrapc/github/guitarrapc/dotfiles/.ssh/config
+```
+
+## Remarks
+
+`setup.sh` is based on [paulirish/dotfiles](https://github.com/paulirish/dotfiles).
+Modified to link keeping directory tree.
