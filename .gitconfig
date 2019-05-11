@@ -4,18 +4,23 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
+	quotepath = False
 [gui]
 	encoding = utf-8
 [web]
 	browser = google-chrome
 [commit]
-	template = /Users/guitarrapc/.stCommitMsg
+	template = ~/.stCommitMsg
 [push]
 	default = current
 	followTags = true
 [fetch]
 	# Auto-kill defunct remote branches
 	prune = true
+[credential]
+	helper = osxkeychain
+[credential "https://source.developers.google.com"]
+	useHttpPath = true
 [include]
 	path = .gitconfig.local
 [help]
