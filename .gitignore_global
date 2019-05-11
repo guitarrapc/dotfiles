@@ -54,3 +54,13 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#### vim
+
+.vim/viminfo
+.vim/swaps/*
+.vim/undo
+
+#### git
+
+.gitconfig.local
