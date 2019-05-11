@@ -1,5 +1,5 @@
 [user]
-	email = guitarrapc@users.noreply.github.com
+	email = 3856350+guitarrapc@users.noreply.github.com
 	name = Ikiru Yoshizaki
 [core]
 	excludesfile = ~/.gitignore_global
@@ -29,12 +29,6 @@
 	smudge = git-lfs smudge --skip -- %f
 	process = git-lfs filter-process --skip
 	required = true
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [alias]
 	# hub alias
     pr = pull-requests
