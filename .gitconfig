@@ -3,6 +3,7 @@
 	name = Ikiru Yoshizaki
 [core]
 	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes
 [gui]
 	encoding = utf-8
 [web]
@@ -22,6 +23,24 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	newMoved = cyan
+	oldMoved = blue
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = green reverse
+	local = yellow
+	remote = green
 [column]
 	ui = auto
 [filter "lfs"]
