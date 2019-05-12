@@ -149,11 +149,11 @@ print_success() {
 #
 
 # finds all .dotfiles in this folder
-declare -a FILES_TO_SYMLINK=$(find . -type f -maxdepth 1 -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|//|/|' | sed -e 's|./.|.|')
+declare -a FILES_TO_SYMLINK=$(find . -maxdepth 1 -type f -name ".*" -not -name .DS_Store -not -name .git -not -name .osx | sed -e 's|//|/|' | sed -e 's|./.|.|')
 #FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
 
 # find all directories to keep directory tree and symlink child files
-declare -a DIR_TREE_OF_SYMLINK=$(find . -type d -mindepth 1 -maxdepth 1 -name "*" -not -name .git -not -name exclude)
+declare -a DIR_TREE_OF_SYMLINK=$(find . -mindepth 1 -maxdepth 1 -type d -name "*" -not -name .git -not -name exclude)
 
 main() {
 
