@@ -9,6 +9,7 @@
         "GO111MODULE": "on"
     },
     "go.formatTool": "goimports",
+    "editor.detectIndentation": false,
     "editor.formatOnSave": true,
     "[terraform]": {
         "editor.formatOnSave": true
