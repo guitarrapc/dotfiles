@@ -22,3 +22,14 @@ $ ./setup.sh
 
 `setup.sh` is based on [paulirish/dotfiles](https://github.com/paulirish/dotfiles).
 Modified to link keeping directory tree.
+
+gen kubectl bash-completion via
+
+```
+echo "if command -v kubectl >/dev/null 2>&1" > ./usr/local/etc/bash_completion.d/kubectl
+echo "then" >> ./usr/local/etc/bash_completion.d/kubectl
+kubectl completion bash >> ./usr/local/etc/bash_completion.d/kubectl
+echo "alias k=kubectl" >> ./usr/local/etc/bash_completion.d/kubectl
+echo "complete -o default -F __start_kubectl k" >> ./usr/local/etc/bash_completion.d/kubectl
+echo "fi" >> ./usr/local/etc/bash_completion.d/kubectl
+```
