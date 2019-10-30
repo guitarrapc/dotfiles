@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# bash-completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+# local bash-completion then use bash-completion@2
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 # git-prompt
 [ -f ~/.gitprompt.sh ] && source ~/.gitprompt.sh
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
