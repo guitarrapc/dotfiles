@@ -152,8 +152,10 @@ print_success() {
 declare -a FILES_TO_SYMLINK=$(find . -maxdepth 1 -type f -name ".*" -not -name .DS_Store -not -name .git -not -name .osx -not -name .gitignore -not -name .bash_history | sed -e 's|//|/|' | sed -e 's|./.|.|')
 #FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
 
-# find all directories to keep directory tree and symlink child files
-declare -a DIR_TREE_OF_SYMLINK=$(find home -mindepth 1 -maxdepth 1 -type d -name "*")
+# find all home directories to keep directory tree and symlink child files
+declare -a HOME_DIR_TREE_OF_SYMLINK=$(find home -mindepth 1 -maxdepth 1 -type d -name "*")
+# find all root directories to keep directory tree and symlink child files
+declare -a ROOT_DIR_TREE_OF_SYMLINK=$(find usr -mindepth 1 -maxdepth 1 -type d -name "*")
 
 main() {
 
@@ -190,7 +192,7 @@ main() {
     local d=""
     local f=""
 
-    for i in ${DIR_TREE_OF_SYMLINK[@]}; do
+    for i in ${HOME_DIR_TREE_OF_SYMLINK[@]}; do
 
         dirs=$(find $i -type d)
         ifs_by_line
@@ -207,6 +209,50 @@ main() {
 
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s/\.\///g")"
             targetFile="$HOME/$(printf "%s" "$f" | sed "s/\.\///g" | sed "s/home\///g")"
+
+            if [ -e "$targetFile" ]; then
+                if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+
+                    ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
+                    if answer_is_yes; then
+                        rm -rf "$targetFile"
+                        ln -fs "${sourceFile}" "${targetFile}" &> /dev/null
+                        execute_result $? "$targetFile → $sourceFile"
+                    else
+                        print_error "$targetFile → $sourceFile"
+                    fi
+
+                else
+                    print_success "$targetFile → $sourceFile"
+                fi
+            else
+                ln -fs "${sourceFile}" "${targetFile}" &> /dev/null
+                execute_result $? "$targetFile → $sourceFile"
+            fi
+        done
+    done
+
+    local targetDir=""
+    local d=""
+    local f=""
+
+    for i in ${ROOT_DIR_TREE_OF_SYMLINK[@]}; do
+
+        dirs=$(find $i -type d)
+        ifs_by_line
+        for d in ${dirs}; do
+            ifs_revert
+            targetDir="/$(printf "%s" "$d" | sed "s/\.\///g" | sed "s/home\///g")"
+            mkdir -p "$targetDir"
+        done
+
+        files=$(find $i -type f)
+        ifs_by_line
+        for f in ${files}; do
+            ifs_revert
+
+            sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s/\.\///g")"
+            targetFile="/$(printf "%s" "$f" | sed "s/\.\///g" | sed "s/home\///g")"
 
             if [ -e "$targetFile" ]; then
                 if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
