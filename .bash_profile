@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # ~/.bashrc
-source ~/.bashrc
+[ -f $HOME/.bashrc ] && source ~/.bashrc
 

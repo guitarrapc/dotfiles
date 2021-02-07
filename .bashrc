@@ -1,2 +1,2 @@
 #!/bin/bash
-source $HOME/.bashrc.custom
+[ -f $HOME/.bashrc.custom ] && source $HOME/.bashrc.custom
