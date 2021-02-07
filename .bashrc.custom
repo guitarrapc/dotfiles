@@ -3,29 +3,35 @@
 # local bash-completion then use bash-completion@2
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 # git-prompt
 [ -f ~/.gitprompt.sh ] && source ~/.gitprompt.sh
 export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
 # git-completion
 [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
-
-# terraforming
-alias terraforming='docker run --rm --name terraforming -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=$AWS_DEFAULT_REGION quay.io/dtan4/terraforming:latest terraforming'
 
 # pyenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-
-# pyenv-virtualenv
-eval "$(pyenv virtualenv-init -)"
+which pyenv > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    eval "$(pyenv init -)"
+    # pyenv-virtualenv
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 # direnv
 export EDITOR=vim
-eval "$(direnv hook bash)"
+which direnv > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    eval "$(direnv hook bash)"
+fi
 
 # ruby
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)";
+fi
 
 # packer
 alias packer='docker run --rm -it -e ARM_CLIENT_ID=$ARM_CLIENT_ID -e ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET -e ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID -e ARM_TENANT_ID=$ARM_TENANT_ID -v $(pwd):/app/ -w /app/packer/builder guitarrapc/packer-ansible-docker:latest'
