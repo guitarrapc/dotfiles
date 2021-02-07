@@ -28,6 +28,16 @@ if [ $? -ne 0 ]; then
     eval "$(direnv hook bash)"
 fi
 
+# kubectl
+which kubectl > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  if [[ "$SHELL" == "/bin/zsh" ]]; then
+    source <(kubectl completion zsh)
+    alias k=kubectl
+    complete -F __start_kubectl k
+  fi
+fi
+
 # ruby
 if which rbenv > /dev/null; then
     eval "$(rbenv init -)";
