@@ -11,16 +11,6 @@ export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 # git-completion
 [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
 
-# pyenv
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-which pyenv > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-    eval "$(pyenv init -)"
-    # pyenv-virtualenv
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # direnv
 export EDITOR=vim
 which direnv > /dev/null 2>&1
@@ -38,17 +28,23 @@ if [ $? -ne 0 ]; then
   fi
 fi
 
-# ruby
+# pyenv
+which pyenv > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    eval "$(pyenv init -)"
+    # pyenv-virtualenv
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# rbenv
 if which rbenv > /dev/null; then
     eval "$(rbenv init -)";
 fi
 
-# packer
-alias packer='docker run --rm -it -e ARM_CLIENT_ID=$ARM_CLIENT_ID -e ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET -e ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID -e ARM_TENANT_ID=$ARM_TENANT_ID -v $(pwd):/app/ -w /app/packer/builder guitarrapc/packer-ansible-docker:latest'
-
-# nodebrew
-export PATH=/usr/local/var/nodebrew/current/bin:$PATH
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# nodeenv
+if which nodeenv > /dev/null; then
+    eval "$(nodenv init -)"
+fi
 
 # golang
 export GOPATH=$HOME/golang
