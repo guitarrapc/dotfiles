@@ -20,5 +20,7 @@ fi
 
 # android
 export ANDROID_SDK_PATH="$HOME/Library/Android/sdk"
-export ANDROID_NDK_PATH=${ANDROID_SDK_PATH}/ndk/22.1.7171670
-export ANDROID_SDK_CMAKE=${ANDROID_SDK_PATH}/cmake/3.10.2.4988404/bin/cmake
+if [[ -d $ANDROID_SDK_PATH ]]; then
+    export ANDROID_NDK_PATH=${ANDROID_SDK_PATH}/ndk/$(ls -A1 $ANDROID_SDK_PATH/ndk)
+    export ANDROID_SDK_CMAKE=${ANDROID_SDK_PATH}/cmake/$(ls -A1 $ANDROID_SDK_PATH/cmake)bin/cmake
+fi
