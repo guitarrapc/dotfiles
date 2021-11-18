@@ -5,12 +5,11 @@
   "workbench.tree.renderIndentGuides": "always",
   "breadcrumbs.enabled": true,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', Consolas, 'Courier New', monospace",
   "editor.detectIndentation": false,
   "explorer.confirmDragAndDrop": false,
   "git.enableSmartCommit": true,
   "terminal.integrated.rendererType": "dom",
-  "window.zoomLevel": 0,
   "terraform.languageServer": {
     "trace.server": "messages",
     "external": true,
@@ -42,5 +41,9 @@
   "[yml]": {
     "editor.tabSize": 2,
     "files.insertFinalNewline": true,
-  }
+  },
+  "terminal.integrated.shell.windows": "${env:SystemRoot}\\System32\\cmd.exe",
+  "window.zoomLevel": 0,
+  "redhat.telemetry.enabled": false,
+  "security.workspace.trust.untrustedFiles": "open"
 }
