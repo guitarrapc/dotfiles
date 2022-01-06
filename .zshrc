@@ -24,3 +24,8 @@ if [[ -d $ANDROID_SDK_PATH ]]; then
     export ANDROID_NDK_PATH=${ANDROID_SDK_PATH}/ndk/$(ls -A1 $ANDROID_SDK_PATH/ndk)
     export ANDROID_SDK_CMAKE=${ANDROID_SDK_PATH}/cmake/$(ls -A1 $ANDROID_SDK_PATH/cmake)bin/cmake
 fi
+
+# kubectl
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
