@@ -26,6 +26,8 @@ if [[ -d $ANDROID_SDK_PATH ]]; then
 fi
 
 # kubectl
-source <(kubectl completion zsh)
-alias k=kubectl
-compdef __start_kubectl k
+if [[ -f "/opt/homebrew/bin/kubectl" ]]; then
+  source <(kubectl completion zsh)
+  alias k=kubectl
+  compdef __start_kubectl k
+fi
