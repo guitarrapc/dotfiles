@@ -10,6 +10,7 @@
   "editor.renderWhitespace": "boundary",
   "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
+  "files.autoGuessEncoding": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -21,6 +22,7 @@
   "go.useLanguageServer": true,
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.scrollback": 2000, // default 1000
   "terraform.languageServer": {
     "trace.server": "messages",
@@ -35,8 +37,9 @@
   "workbench.list.smoothScrolling": true,
   "workbench.tree.indent": 12,
   "workbench.tree.renderIndentGuides": "always",
-  "window.zoomLevel": 0,
   "[dockercompose]": {
+    // wait for vscode-docker 1.19 https://github.com/microsoft/vscode-docker/pull/3357
+    // due to compose-laguage-service internal settings. https://github.com/microsoft/compose-language-service/issues/70
     "editor.formatOnSave": false,
     "editor.tabSize": 4
   },
@@ -54,5 +57,7 @@
   },
   "[yml]": {
     "editor.tabSize": 2
-  }
+  },
+  "window.zoomLevel": 0,
+  "editor.inlineSuggest.enabled": true
 }
