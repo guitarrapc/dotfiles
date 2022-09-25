@@ -152,13 +152,13 @@ print_success() {
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 # finds all .dotfiles in this folder
-declare -a FILES_TO_SYMLINK=$(find "$SCRIPT_DIR/" -maxdepth 1 -type f -name ".*" -not -name .DS_Store -not -name .git -not -name .osx -not -name .gitignore -not -name .gitkeep -not -name .bash_history | sed -e 's|//|/|' | sed -e 's|./.|.|')
+declare -a FILES_TO_SYMLINK=$(cd "$SCRIPT_DIR"; find "." -maxdepth 1 -type f -name ".*" -not -name .DS_Store -not -name .git -not -name .osx -not -name .gitignore -not -name .gitkeep -not -name .bash_history | sed -e 's|//|/|' | sed -e 's|./.|.|')
 #FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
 
 # find all home directories to keep directory tree and symlink child files
-declare -a HOME_DIR_TREE_OF_SYMLINK=$(find "$SCRIPT_DIR/home" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a HOME_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "home" -mindepth 1 -maxdepth 1 -type d -name "*")
 # find all root directories to keep directory tree and symlink child files
-declare -a ROOT_DIR_TREE_OF_SYMLINK=$(find "$SCRIPT_DIR/usr" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a ROOT_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "usr" -mindepth 1 -maxdepth 1 -type d -name "*")
 
 main() {
 
