@@ -7,7 +7,7 @@ this repo is dotfiles for macos.
 ```shell
 $ git clone git@github.com:guitarrapc/dotfiles.git
 $ cd dotfiles
-$ bash -e ./setup.sh
+$ bash -e ./install.sh
   [✔] /Users/guitarrapc/.bashrc → /Users/guitarrapc/github/guitarrapc/dotfiles/.bashrc
   [✔] /Users/guitarrapc/.gitignore_global → /Users/guitarrapc/github/guitarrapc/dotfiles/.gitignore_global
   [✔] /Users/guitarrapc/.ansible.cfg → /Users/guitarrapc/github/guitarrapc/dotfiles/.ansible.cfg
