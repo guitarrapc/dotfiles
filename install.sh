@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -eo pipefail -o xtrace
 
 # this symlinks all the dotfiles (and .vim/) to ~/
 # it also symlinks ~/bin for easy updating
