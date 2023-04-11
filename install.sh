@@ -220,7 +220,7 @@ main() {
         ifs_by_line
         for d in ${dirs}; do
             ifs_revert
-            targetDir="$HOME/$(printf "%s" "$d" | sed -e "s|\./||g" | sed -e "s|home/||g")"
+            targetDir="$HOME/$(printf "%s" "$d" | sed -e "s|\./||g" | sed -e "s|HOME/||g")"
             mkdir -p "$targetDir"
         done
 
@@ -230,7 +230,7 @@ main() {
             ifs_revert
 
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
-            targetFile="$HOME/$(printf "%s" "$f" | sed "s|\./||g" | sed "s|home/||g")"
+            targetFile="$HOME/$(printf "%s" "$f" | sed "s|\./||g" | sed "s|HOME/||g")"
 
             if [[ -e "$targetFile" ]]; then
                 if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
@@ -268,7 +268,7 @@ main() {
         ifs_by_line
         for d in ${dirs}; do
             ifs_revert
-            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|usr/||g")"
+            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|ROOT/||g")"
             mkdir -p "$targetDir"
         done
 
@@ -278,7 +278,7 @@ main() {
             ifs_revert
 
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
-            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|usr/||g")"
+            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|ROOT/||g")"
 
             if [[ -e "$targetFile" ]]; then
                 if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
