@@ -34,5 +34,5 @@ jobs:
           set -eo pipefail
           ls -la "$HOME" | grep .gitconfig | grep "${{ github.workspace }}/.gitconfig"
           ls -la "$HOME" | grep .gitignore_global | grep "${{ github.workspace }}/.gitignore_global"
-          ls -la "$HOME/.ssh" | grep "config"
-          ls -la "$HOME/Library/Application Support/Code/User/" | grep settings.json
+          ls -la "$HOME/.ssh" | grep "config" | grep"${{ github.workspace }}/HOME/.ssh/config"
+          ls -la "$HOME/Library/Application Support/Code/User/" | grep settings.json | grep "${{ github.workspace }}/HOME/Library/Application Support/Code/User/settings.json"
