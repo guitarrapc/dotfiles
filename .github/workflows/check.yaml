@@ -1,0 +1,38 @@
+name: Check
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+  workflow_dispatch:
+    inputs:
+      sh-debug:
+        description: "enable debug on install.sh"
+        default: "-x"
+
+env:
+  SH_DEBUG: ${{ github.event_name == 'workflow_dispath' && inputs.sh-debug || '' }}
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        force: ["y", "n"]
+    runs-on: macos-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dotfiles
+        run: bash ${SH_DEBUG} ./install.sh --force ${{ matrix.force }}
+      - name: Show "$HOME"
+        run: ls -la "$HOME"
+      - name: Test installed files
+        run: |
+          set -eo pipefail
+          ls -la "$HOME" | grep .gitignore | grep "${{ github.workspace }}/.gitignore"
+          ls -la "$HOME" | grep .gitignore_global | grep "${{ github.workspace }}/.gitignore_global"
+          ls -la "$HOME/.ssh" | grep "config" | grep "${{ github.workspace }}/HOME/.ssh/config"
+          ls -la "$HOME/Library/Application Support/Code/User/" | grep settings.json | grep "${{ github.workspace }}/HOME/Library/Application Support/Code/User/settings.json"

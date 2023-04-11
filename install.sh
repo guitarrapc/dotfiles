@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 
 # this symlinks all the dotfiles (and .vim/) to ~/
 # it also symlinks ~/bin for easy updating
@@ -12,9 +13,14 @@
 
 
 
-# jump down to line ~140 for the start.
+# jump down to line ~157 for the start.
 
-
+while [ $# -gt 0 ]; do
+    case $1 in
+        --force) _FORCE=$2; shift 2; ;; # input y or n
+        *) shift ;;
+    esac
+done
 
 #
 # utils !!!
@@ -34,6 +40,11 @@ ask() {
 }
 
 ask_for_confirmation() {
+    if [[ "${_FORCE:=}" != "" ]]; then
+        print_question "$1 (--force detected, skip prompt.)\n"
+        REPLY=$_FORCE
+        return
+    fi
     print_question "$1 (y/n) "
     read -n 1
     printf "\n"
@@ -78,9 +89,9 @@ get_os() {
     declare -r OS_NAME="$(uname -s)"
     local os=""
 
-    if [ "$OS_NAME" == "Darwin" ]; then
+    if [[ "$OS_NAME" == "Darwin" ]]; then
         os="osx"
-    elif [ "$OS_NAME" == "Linux" ] && [ -e "/etc/lsb-release" ]; then
+    elif [[ "$OS_NAME" == "Linux" ]] && [[ -e "/etc/lsb-release" ]]; then
         os="ubuntu"
     fi
 
@@ -102,9 +113,9 @@ is_git_repository() {
 }
 
 mkd() {
-    if [ -n "$1" ]; then
-        if [ -e "$1" ]; then
-            if [ ! -d "$1" ]; then
+    if [[ -n "$1" ]]; then
+        if [[ -e "$1" ]]; then
+            if [[ ! -d "$1" ]]; then
                 print_error "$1 - a file with the same name already exists!"
             else
                 print_success "$1"
@@ -131,12 +142,12 @@ print_question() {
 }
 
 print_result() {
-    [ $1 -eq 0 ] \
-        && print_success "$2" \
-        || print_error "$2"
-
-    [ "$3" == "true" ] && [ $1 -ne 0 ] \
-        && exit
+    if [[ "$1" == "0" ]]; then
+        print_success "$2"
+    else
+        print_error "$2"
+        exit $1
+    fi
 }
 
 print_success() {
@@ -156,9 +167,9 @@ declare -a FILES_TO_SYMLINK=$(cd "$SCRIPT_DIR"; find "." -maxdepth 1 -type f -na
 #FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
 
 # find all home directories to keep directory tree and symlink child files
-declare -a HOME_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "home" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a HOME_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "HOME" -mindepth 1 -maxdepth 1 -type d -name "*")
 # find all root directories to keep directory tree and symlink child files
-declare -a ROOT_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "usr" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a ROOT_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "ROOT" -mindepth 1 -maxdepth 1 -type d -name "*")
 
 main() {
 
@@ -166,13 +177,17 @@ main() {
     local sourceFile=""
     local targetFile=""
 
-    for i in ${FILES_TO_SYMLINK[@]}; do
+    echo "${FILES_TO_SYMLINK[@]}" | while read -r i ; do
+
+        if [[ "$i" == "" ]]; then
+          break
+        fi
 
         sourceFile="$(pwd)/$i"
         targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
-        if [ -e "$targetFile" ]; then
-            if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+        if [[ -e "$targetFile" ]]; then
+            if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                 ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                 if answer_is_yes; then
@@ -195,13 +210,17 @@ main() {
     local d=""
     local f=""
 
-    for i in ${HOME_DIR_TREE_OF_SYMLINK[@]}; do
+    echo "${HOME_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
+
+        if [[ "$i" == "" ]]; then
+          break
+        fi
 
         dirs=$(find $i -type d)
         ifs_by_line
         for d in ${dirs}; do
             ifs_revert
-            targetDir="$HOME/$(printf "%s" "$d" | sed -e "s|\./||g" | sed -e "s|home/||g")"
+            targetDir="$HOME/$(printf "%s" "$d" | sed -e "s|\./||g" | sed -e "s|HOME/||g")"
             mkdir -p "$targetDir"
         done
 
@@ -211,10 +230,10 @@ main() {
             ifs_revert
 
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
-            targetFile="$HOME/$(printf "%s" "$f" | sed "s|\./||g" | sed "s|home/||g")"
+            targetFile="$HOME/$(printf "%s" "$f" | sed "s|\./||g" | sed "s|HOME/||g")"
 
-            if [ -e "$targetFile" ]; then
-                if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+            if [[ -e "$targetFile" ]]; then
+                if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                     ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                     if answer_is_yes; then
@@ -239,13 +258,17 @@ main() {
     local d=""
     local f=""
 
-    for i in ${ROOT_DIR_TREE_OF_SYMLINK[@]}; do
+    echo "${ROOT_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
+
+        if [[ "$i" == "" ]]; then
+          break
+        fi
 
         dirs=$(find $i -type d)
         ifs_by_line
         for d in ${dirs}; do
             ifs_revert
-            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|usr/||g")"
+            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|ROOT/||g")"
             mkdir -p "$targetDir"
         done
 
@@ -255,10 +278,10 @@ main() {
             ifs_revert
 
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
-            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|usr/||g")"
+            targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|ROOT/||g")"
 
-            if [ -e "$targetFile" ]; then
-                if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+            if [[ -e "$targetFile" ]]; then
+                if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                     ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                     if answer_is_yes; then
