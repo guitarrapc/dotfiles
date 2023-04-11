@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail -o xtrace
+set -eo pipefail
 
 # this symlinks all the dotfiles (and .vim/) to ~/
 # it also symlinks ~/bin for easy updating
@@ -13,7 +13,7 @@ set -eo pipefail -o xtrace
 
 
 
-# jump down to line ~140 for the start.
+# jump down to line ~157 for the start.
 
 while [ $# -gt 0 ]; do
     case $1 in
@@ -89,9 +89,9 @@ get_os() {
     declare -r OS_NAME="$(uname -s)"
     local os=""
 
-    if [ "$OS_NAME" == "Darwin" ]; then
+    if [[ "$OS_NAME" == "Darwin" ]]; then
         os="osx"
-    elif [ "$OS_NAME" == "Linux" ] && [ -e "/etc/lsb-release" ]; then
+    elif [[ "$OS_NAME" == "Linux" ]] && [[ -e "/etc/lsb-release" ]]; then
         os="ubuntu"
     fi
 
@@ -113,9 +113,9 @@ is_git_repository() {
 }
 
 mkd() {
-    if [ -n "$1" ]; then
-        if [ -e "$1" ]; then
-            if [ ! -d "$1" ]; then
+    if [[ -n "$1" ]]; then
+        if [[ -e "$1" ]]; then
+            if [[ ! -d "$1" ]]; then
                 print_error "$1 - a file with the same name already exists!"
             else
                 print_success "$1"
@@ -142,12 +142,12 @@ print_question() {
 }
 
 print_result() {
-    [ $1 -eq 0 ] \
-        && print_success "$2" \
-        || print_error "$2"
-
-    [ "$3" == "true" ] && [ $1 -ne 0 ] \
-        && exit
+    if [[ "$1" == "0" ]]; then
+        print_success "$2"
+    else
+        print_error "$2"
+        exit $1
+    fi
 }
 
 print_success() {
@@ -182,8 +182,8 @@ main() {
         sourceFile="$(pwd)/$i"
         targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
-        if [ -e "$targetFile" ]; then
-            if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+        if [[ -e "$targetFile" ]]; then
+            if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                 ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                 if answer_is_yes; then
@@ -224,8 +224,8 @@ main() {
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
             targetFile="$HOME/$(printf "%s" "$f" | sed "s|\./||g" | sed "s|home/||g")"
 
-            if [ -e "$targetFile" ]; then
-                if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+            if [[ -e "$targetFile" ]]; then
+                if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                     ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                     if answer_is_yes; then
@@ -268,8 +268,8 @@ main() {
             sourceFile="$(pwd)/$(printf "%s" "$f" | sed "s|\./||g")"
             targetDir="/$(printf "%s" "$d" | sed "s|\./||g" | sed "s|usr/||g")"
 
-            if [ -e "$targetFile" ]; then
-                if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
+            if [[ -e "$targetFile" ]]; then
+                if [[ "$(readlink "$targetFile")" != "$sourceFile" ]]; then
 
                     ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
                     if answer_is_yes; then
