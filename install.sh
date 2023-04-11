@@ -172,7 +172,7 @@ main() {
     echo "${FILES_TO_SYMLINK[@]}" | while read -r i ; do
 
         if [[ "$i" == "" ]]; then
-          break
+          continue
         fi
 
         sourceFile="$(pwd)/$i"
@@ -201,6 +201,10 @@ main() {
     for current in ${OTHERS}; do
         # finds all .dotfiles in this folder
         declare -a TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "${current}" -mindepth 1 -maxdepth 1 -type d -name "*")
+
+        if [[ "${TREE_OF_SYMLINK}" == "" ]]; then
+          continue
+        fi
 
         # branch for HOME and ROOT
         if [[ "${current}" == "HOME" ]]; then
