@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # this symlinks all the dotfiles (and .vim/) to ~/
 # it also symlinks ~/bin for easy updating
@@ -14,7 +15,12 @@
 
 # jump down to line ~140 for the start.
 
-
+while [ $# -gt 0 ]; do
+    case $1 in
+        --force) _FORCE=$2; shift 2; ;; # input y or n
+        *) shift ;;
+    esac
+done
 
 #
 # utils !!!
@@ -34,6 +40,11 @@ ask() {
 }
 
 ask_for_confirmation() {
+    if [[ "${_FORCE:=}" != "" ]]; then
+        print_question "$1 (--force detected, skip prompt.)\n"
+        REPLY=$_FORCE
+        return
+    fi
     print_question "$1 (y/n) "
     read -n 1
     printf "\n"
@@ -156,9 +167,9 @@ declare -a FILES_TO_SYMLINK=$(cd "$SCRIPT_DIR"; find "." -maxdepth 1 -type f -na
 #FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
 
 # find all home directories to keep directory tree and symlink child files
-declare -a HOME_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "home" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a HOME_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "HOME" -mindepth 1 -maxdepth 1 -type d -name "*")
 # find all root directories to keep directory tree and symlink child files
-declare -a ROOT_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "usr" -mindepth 1 -maxdepth 1 -type d -name "*")
+declare -a ROOT_DIR_TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "ROOT" -mindepth 1 -maxdepth 1 -type d -name "*")
 
 main() {
 
@@ -166,7 +177,7 @@ main() {
     local sourceFile=""
     local targetFile=""
 
-    for i in ${FILES_TO_SYMLINK[@]}; do
+    echo "${FILES_TO_SYMLINK[@]}" | while read -r i ; do
 
         sourceFile="$(pwd)/$i"
         targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
@@ -195,7 +206,7 @@ main() {
     local d=""
     local f=""
 
-    for i in ${HOME_DIR_TREE_OF_SYMLINK[@]}; do
+    echo "${HOME_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
 
         dirs=$(find $i -type d)
         ifs_by_line
@@ -239,7 +250,7 @@ main() {
     local d=""
     local f=""
 
-    for i in ${ROOT_DIR_TREE_OF_SYMLINK[@]}; do
+    echo "${ROOT_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
 
         dirs=$(find $i -type d)
         ifs_by_line
