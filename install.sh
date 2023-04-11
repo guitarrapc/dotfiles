@@ -272,7 +272,7 @@ main() {
                 if [ "$(readlink "$targetFile")" != "$sourceFile" ]; then
 
                     ask_for_confirmation "'$targetFile' already exists, do you want to overwrite it?"
-                    if answer_is_yes; then]/
+                    if answer_is_yes; then
                         rm -rf "$targetFile"
                         ln -fs "${sourceFile}" "${targetFile}" &> /dev/null
                         execute_result $? "$targetFile → $sourceFile"
