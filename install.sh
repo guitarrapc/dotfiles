@@ -179,6 +179,10 @@ main() {
 
     echo "${FILES_TO_SYMLINK[@]}" | while read -r i ; do
 
+        if [[ "$i" == "" ]]; then
+          break
+        fi
+
         sourceFile="$(pwd)/$i"
         targetFile="$HOME/$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
@@ -207,6 +211,10 @@ main() {
     local f=""
 
     echo "${HOME_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
+
+        if [[ "$i" == "" ]]; then
+          break
+        fi
 
         dirs=$(find $i -type d)
         ifs_by_line
@@ -251,6 +259,10 @@ main() {
     local f=""
 
     echo "${ROOT_DIR_TREE_OF_SYMLINK[@]}" | while read -r i ; do
+
+        if [[ "$i" == "" ]]; then
+          break
+        fi
 
         dirs=$(find $i -type d)
         ifs_by_line
