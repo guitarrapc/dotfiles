@@ -163,7 +163,8 @@ print_success() {
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 
 # finds all .dotfiles in this folder
-declare -a FILES_TO_SYMLINK=$(cd "$SCRIPT_DIR"; find "." -maxdepth 1 -type f -name ".*" -not -name .DS_Store -not -name .git -not -name .osx -not -name .gitignore -not -name .gitkeep -not -name .bash_history | sed -e 's|//|/|' | sed -e 's|./.|.|')
+not_names="-not -name .DS_Store -not -name .git -not -name .osx -not -name .gitignore -not -name .gitkeep -not -name .bash_history"
+declare -a FILES_TO_SYMLINK=$(cd "$SCRIPT_DIR"; find "." -maxdepth 1 -type f -name ".*" ${not_names} | sed -e 's|//|/|' | sed -e 's|./.|.|')
 # declare other folders
 OTHERS="HOME ROOT"
 
