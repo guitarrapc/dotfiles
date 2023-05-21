@@ -207,7 +207,7 @@ main() {
 
     for current in ${OTHERS}; do
         # finds all .dotfiles in this folder
-        declare -a TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "${current}" -mindepth 1 -maxdepth 1 -type d -name "*" ${not_names})
+        declare -a TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "${current}" -mindepth 1 -maxdepth 1 -type d -name "*")
 
         if [[ "${TREE_OF_SYMLINK}" == "" ]]; then
           continue
@@ -231,7 +231,7 @@ main() {
                 mkdir -p "$targetDir"
             done
 
-            files=$(find "$i" -type f)
+            files=$(find "$i" -type f ${not_names})
             ifs_by_line
             for file in ${files}; do
                 ifs_revert
