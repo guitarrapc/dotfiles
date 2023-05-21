@@ -207,7 +207,7 @@ main() {
 
     for current in ${OTHERS}; do
         # finds all .dotfiles in this folder
-        declare -a TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "${current}" -mindepth 1 -maxdepth 1 -type d -name "*")
+        declare -a TREE_OF_SYMLINK=$(cd "$SCRIPT_DIR"; find "${current}" -mindepth 1 -maxdepth 1 -type d -name "*" ${not_names})
 
         if [[ "${TREE_OF_SYMLINK}" == "" ]]; then
           continue
