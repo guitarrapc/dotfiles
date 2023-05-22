@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# local bash-completion then use bash-completion@2
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# git-prompt
+[ -f ~/.gitprompt.sh ] && source ~/.gitprompt.sh
+export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+# git-completion
+[ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash ] && . /Library/Developer/CommandLineTools/usr/share/git-core/git-completion.bash
+
+# direnv
+export EDITOR=vim
+which direnv > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    eval "$(direnv hook bash)"
+fi
+
+# kubectl
+which kubectl > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  if [[ "$SHELL" == "/bin/zsh" ]]; then
+    source <(kubectl completion zsh)
+    alias k=kubectl
+    complete -F __start_kubectl k
+  fi
+fi
+
+# pyenv
+which pyenv > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    eval "$(pyenv init -)"
+    # pyenv-virtualenv
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# rbenv
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)";
+fi
+
+# nodeenv
+if which nodeenv > /dev/null; then
+    eval "$(nodenv init -)"
+fi
+
+# golang
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+export GO111MODULE=on
+
+# load alias
+[ -f ~/.bashrc.alias ] && source ~/.bashrc.alias
+
+# local settings
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
