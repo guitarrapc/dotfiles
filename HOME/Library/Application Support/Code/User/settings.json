@@ -3,11 +3,14 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "'DejaVu Sans Mono - Bront', 'Cascadia Mono', 'SF Mono', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'Cascadia Mono', 'SF Mono', 'Consolas', 'Courier New', 'monospace'",
   "editor.guides.bracketPairs": true,
+  "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
+  "editor.mouseWheelZoom": true,
   "editor.renderControlCharacters": true,
-  "editor.renderWhitespace": "boundary",
+  "editor.renderWhitespace": "all",
+  "editor.suggest.preview": true,
   "editor.wordWrap": "on",
   "explorer.confirmDragAndDrop": false,
   "files.autoGuessEncoding": true,
@@ -23,14 +26,7 @@
   "redhat.telemetry.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.defaultProfile.windows": "Command Prompt",
-  "terminal.integrated.scrollback": 2000, // default 1000
-  "terraform.languageServer": {
-    "trace.server": "messages",
-    "external": true,
-    "args": [
-      "serve"
-    ]
-  },
+  "terminal.integrated.scrollback": 2000,
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.list.horizontalScrolling": true,
@@ -44,13 +40,23 @@
     "editor.tabSize": 4
   },
   "[json]": {
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "[jsonc]": {
     "editor.tabSize": 2
   },
+  "[python]": {
+    "editor.formatOnType": true
+  },
   "[terraform]": {
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
   },
   "[yaml]": {
     "editor.tabSize": 2
@@ -59,5 +65,12 @@
     "editor.tabSize": 2
   },
   "window.zoomLevel": 0,
-  "editor.inlineSuggest.enabled": true
+  // see: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform#configuration
+  "terraform.codelens.referenceCount": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
 }
