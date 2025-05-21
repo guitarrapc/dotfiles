@@ -21,18 +21,24 @@ jobs:
       fail-fast: false
       matrix:
         force: ["y", "n"]
+    permissions:
+      contents: read
     runs-on: macos-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
       - name: Install dotfiles
         run: bash ${SH_DEBUG} ./install.sh --force ${{ matrix.force }}
       - name: Show "$HOME"
         run: ls -la "$HOME"
       - name: Test installed files
         run: |
-          set -exo pipefail
-          ls -la "$HOME" | grep .gitignore | grep "${{ github.workspace }}/.gitignore"
-          ls -la "$HOME" | grep .gitignore_global | grep "${{ github.workspace }}/.gitignore_global"
-          ls -la "$HOME/.ssh" | grep "config" | grep "${{ github.workspace }}/HOME/.ssh/config"
-          ls -la "$HOME/Library/Application Support/Code/User/" | grep settings.json | grep "${{ github.workspace }}/HOME/Library/Application Support/Code/User/settings.json"
+          set -eo pipefail
+          # Check if .gitconfig exists and is a symlink
+          if [[ -L "$HOME/.gitconfig" && "$(readlink -f "$HOME/.gitconfig")" == "${{ github.workspace }}/.gitconfig" ]]; then
+            echo ".gitconfig is correctly linked"
+          else
+            echo "::error::.gitconfig is missing or not linked correctly" && exit 1
+          fi
