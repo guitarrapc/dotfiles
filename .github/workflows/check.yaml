@@ -33,12 +33,12 @@ jobs:
         run: bash ${SH_DEBUG} ./install.sh --force ${{ matrix.force }}
       - name: Show "$HOME"
         run: ls -la "$HOME"
-      - name: Test installed files
+      - name: Test file located as expected
         run: |
           set -eo pipefail
-          # Check if .gitconfig exists and is a symlink
-          if [[ -L "$HOME/.gitconfig" && "$(readlink -f "$HOME/.gitconfig")" == "${{ github.workspace }}/.gitconfig" ]]; then
-            echo ".gitconfig is correctly linked"
+          # Check if .config/git/config exists and is a symlink
+          if [[ -L "$HOME/.config/git/config" && "$(readlink -f "$HOME/.config/git/config")" == "${{ github.workspace }}/HOME/.config/git/config" ]]; then
+            echo ".config/git/config is correctly linked"
           else
-            echo "::error::.gitconfig is missing or not linked correctly" && exit 1
+            echo "::error::.config/git/config is missing or not linked correctly" && exit 1
           fi
