@@ -20,12 +20,12 @@ $ dotfileslinker --version
 $ rm DotfilesLinker_darwin_arm64.tar.gz
 
 # Go dotfileslinker-go
-$ curl -L -o DotfilesLinker_darwin_arm64.tar.gz https://github.com/guitarrapc/dotfileslinker-go/releases/download/v0.3.0/dotfileslinker_0.3.0_darwin_arm64.tar.gz
-$ tar -xzf DotfilesLinker_darwin_arm64.tar.gz
-$ sudo chmod +x DotfilesLinker
-$ sudo mv DotfilesLinker /usr/local/bin/dotfileslinker
+$ curl -L -o dotfileslinker.tar.gz https://github.com/guitarrapc/dotfileslinker-go/releases/download/v0.3.0/dotfileslinker_0.3.0_darwin_arm64.tar.gz
+$ tar -xzf dotfileslinker.tar.gz
+$ sudo chmod +x dotfileslinker
+$ sudo mv dotfileslinker /usr/local/bin/dotfileslinker
 $ dotfileslinker --version
-$ rm DotfilesLinker_darwin_arm64.tar.gz
+$ rm dotfileslinker.tar.gz
 ```
 
 ### Run `./install.ps1` to setup symlink
