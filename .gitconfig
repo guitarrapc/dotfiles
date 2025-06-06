@@ -1,7 +1,7 @@
 [user]
 	email = 3856350+guitarrapc@users.noreply.github.com
 	name = Ikiru Yoshizaki
-	signingKey = ""
+	signingKey = 
 [core]
 	excludesfile = ~/.gitignore_global
 	attributesfile = ~/.gitattributes
@@ -64,5 +64,9 @@
 	see = browse
 [gpg]
 	program = gpg
+	format = 
 [tag]
 	forceSignAnnotated = false
+[gpg "ssh"]
+	program = 
+	allowedSignersFile = 
