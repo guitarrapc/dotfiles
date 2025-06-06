@@ -74,5 +74,21 @@
   "go.useLanguageServer": true,
   "terraform.codelens.referenceCount": true,
   "textlint.autoFixOnSave": true,
-  "window.zoomLevel": 0
+  "hediet.vscode-drawio.resizeImages": null,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "settingsSync.ignoredExtensions": [
+    "bmewburn.vscode-intelephense-client",
+    "ms-python.vscode-pylance",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "saoudrizwan.claude-dev"
+  ],
+  "window.zoomLevel": 0,
+  "chat.tools.autoApprove": true,
+  "chat.agent.maxRequests": 999,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "accessibility.signals.chatResponseReceived": {
+    "sound": "on"
+  },
+  "chat.editing.autoAcceptDelay": 5
 }
