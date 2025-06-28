@@ -1,4 +1,4 @@
-.gitignore
-.gitattributes
 .editorconfig
+.gitattributes
+.gitignore
 .DS_Store
