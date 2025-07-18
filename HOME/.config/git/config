@@ -10,8 +10,7 @@
 	filemode = false
 	longpaths = true
 	ignorecase = false
-	# windows only
-	autocrlf = true
+	autocrlf = input
 [column]
 	ui = auto
 [branch]

@@ -100,4 +100,5 @@
     "sound": "on"
   },
   "chat.editing.autoAcceptDelay": 5,
+  "github.copilot.nextEditSuggestions.enabled": true,
 }
