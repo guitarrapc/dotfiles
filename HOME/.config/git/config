@@ -11,6 +11,7 @@
 	longpaths = true
 	ignorecase = false
 	autocrlf = input
+  eol = lf
 [column]
 	ui = auto
 [branch]
