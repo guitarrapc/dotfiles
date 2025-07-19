@@ -2,9 +2,6 @@
 alias ls='ls -AFG'
 alias ll='ls -hlt'
 
-# command fix
-setopt correct
-
 # completion
 autoload -Uz compinit && compinit
 
@@ -19,3 +16,8 @@ if [[ -f "/opt/homebrew/bin/kubectl" ]]; then
   alias k=kubectl
   compdef __start_kubectl k
 fi
+
+# stop correct for LLM
+unsetopt correct_all
+unsetopt correct
+export ENABLE_CORRECTION="false"
