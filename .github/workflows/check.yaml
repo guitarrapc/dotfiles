@@ -42,3 +42,13 @@ jobs:
           else
             echo "::error::.config/git/config is missing or not linked correctly" && exit 1
           fi
+
+  check-complete:
+    needs: [install]
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Check complete
+        run: echo "Check complete."
