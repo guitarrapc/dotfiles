@@ -58,3 +58,5 @@ $RECYCLE.BIN/
 # Gibo
 .gitignore-boilerplates
 .gitconfig.local
+
+**/.claude/settings.local.json
